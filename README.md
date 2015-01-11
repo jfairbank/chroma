@@ -30,7 +30,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install chroma
+    $ gem install chroma --pre
 
 ## Usage
 
