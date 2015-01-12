@@ -1,10 +1,20 @@
 module Chroma
   module ColorModes
+    class Base
+      def eql?(other)
+        self.class == other.class && to_a == other.to_a
+      end
+
+      def ==(other)
+        to_a == other_to_self(other).to_a
+      end
+    end
+
     class << self
       private
 
       def build(name, *attrs)
-        Class.new do
+        Class.new(ColorModes::Base) do
           attr_accessor *(attrs + [:a])
 
           class_eval <<-EOS
@@ -19,6 +29,10 @@ module Chroma
             alias_method :to_ary, :to_a
 
             protected
+
+            def other_to_self(other)
+              other.to_#{name}
+            end
 
             def to_rgb
               Converters::RgbConverter.convert_#{name}(self)
