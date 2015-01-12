@@ -2,12 +2,12 @@ module Chroma
   module RgbGenerator
     class FromHsv < Base
       def initialize(format, hsv)
-        @format = format || :hsv
+        @format = format
         @hsv = hsv
       end
 
       def generate
-        [Converters::RgbConverter.convert_hsv(@hsv), @format]
+        FromHsvValues.new(@format, *@hsv.to_a).generate
       end
     end
   end

@@ -5,12 +5,12 @@ module Chroma
         s = to_percentage(s)
         v = to_percentage(v)
 
-        @format = format
+        @format = format || :hsv
         @hsv = ColorModes::Hsv.new(h, s, v, a)
       end
 
       def generate
-        FromHsv.new(@format, @hsv).generate
+        [Converters::RgbConverter.convert_hsv(@hsv), @format]
       end
     end
   end
