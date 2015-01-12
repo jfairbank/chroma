@@ -19,7 +19,7 @@ module Chroma
                 when ColorModes::Rgb then FromRgb
                 end
 
-        klass.new(input)
+        klass.new(nil, input)
       end
 
       def round(n)

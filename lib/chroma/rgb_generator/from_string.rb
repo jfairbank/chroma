@@ -28,7 +28,7 @@ module Chroma
         end
       end
 
-      def initialize(input)
+      def initialize(format, input)
         @input = normalize_input(input)
       end
 
