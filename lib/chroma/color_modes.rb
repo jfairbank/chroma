@@ -3,7 +3,7 @@ module Chroma
     class << self
       private
 
-      def build(name, *attrs)
+      def build(*attrs)
         Class.new do
           attr_accessor *(attrs + [:a])
 
@@ -17,27 +17,13 @@ module Chroma
             end
 
             alias_method :to_ary, :to_a
-
-            protected
-
-            def to_rgb
-              Converters::RgbConverter.convert_#{name}(self)
-            end
-
-            def to_hsl
-              Converters::HslConverter.convert_#{name}(self)
-            end
-
-            def to_hsv
-              Converters::HsvConverter.convert_#{name}(self)
-            end
           EOS
         end
       end
     end
 
-    Rgb = build :rgb, :r, :g, :b
-    Hsl = build :hsl, :h, :s, :l
-    Hsv = build :hsv, :h, :s, :v
+    Rgb = build :r, :g, :b
+    Hsl = build :h, :s, :l
+    Hsv = build :h, :s, :v
   end
 end
