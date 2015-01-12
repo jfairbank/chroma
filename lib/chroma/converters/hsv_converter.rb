@@ -28,6 +28,14 @@ module Chroma
 
         ColorModes::Hsv.new(h * 360, s, v, @input.a)
       end
+
+      def convert_hsl
+        HslConverter.convert_rgb(RgbConverter.convert_hsv(@input))
+      end
+
+      def convert_hsv
+        @input
+      end
     end
   end
 end

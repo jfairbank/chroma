@@ -1,6 +1,10 @@
 module Chroma
   module Converters
     class RgbConverter < Base
+      def convert_rgb
+        @input
+      end
+
       def convert_hsl
         h, s, l = @input
 
