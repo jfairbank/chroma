@@ -56,11 +56,15 @@ module Chroma
         to_alpha_s(:rgb, middle)
       end
 
-      def to_name
+      def to_name(hex_for_unknown = false)
         return 'transparent' if alpha.zero?
 
         if alpha < 1 || (name = Chroma.name_from_hex(to_hex(true))).nil?
-          '<unknown>'
+          if hex_for_unknown
+            to_hex_s
+          else
+            '<unknown>'
+          end
         else
           name
         end
@@ -80,7 +84,7 @@ module Chroma
         when 'hex8'        then to_hex8_s
         when 'hsl'         then to_hsl_s
         when 'hsv'         then to_hsv_s
-        when 'name'        then to_name
+        when 'name'        then to_name(true)
         else                    to_hex_s
         end
       end
