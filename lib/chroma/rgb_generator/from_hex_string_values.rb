@@ -21,7 +21,7 @@ module Chroma
           new(format, r, g, b)
         end
 
-        def from_hex8(format, r, g, b, a)
+        def from_hex8(format, a, r, g, b)
           new(format || :hex8, r, g, b, a)
         end
       end
