@@ -11,6 +11,14 @@ module Chroma
       @format = format || gen_format
     end
 
+    def eql?(other)
+      @rgb.eql?(other.rgb)
+    end
+
+    def ==(other)
+      @rgb == other.rgb
+    end
+
     def complement
       hsl = to_hsl
       hsl.h = (hsl.h + 180) % 360
@@ -20,6 +28,10 @@ module Chroma
     def palette
       Harmonies.new(self)
     end
+
+    protected
+
+    attr_reader :rgb
 
     private
 
