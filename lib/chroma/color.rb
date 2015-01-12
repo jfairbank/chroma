@@ -12,11 +12,11 @@ module Chroma
     end
 
     def eql?(other)
-      @rgb.eql?(other.rgb)
+      self.class == other.class && self == other
     end
 
     def ==(other)
-      @rgb == other.rgb
+      to_hex_s == other.to_hex_s
     end
 
     def complement
