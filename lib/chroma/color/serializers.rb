@@ -103,7 +103,7 @@ module Chroma
 
       def to_alpha_s(mode, middle)
         if alpha < 1
-          "#{mode}a(#{middle}, #{alpha})"
+          "#{mode}a(#{middle}, #{rounded_alpha})"
         else
           "#{mode}(#{middle})"
         end
