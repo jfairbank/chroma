@@ -5,3 +5,9 @@ RSpec::Matchers.define :generate_palette do |expected|
     actual == expected
   end
 end
+
+RSpec::Matchers.define :have_format do |expected|
+  match do |actual|
+    actual.format == expected
+  end
+end
