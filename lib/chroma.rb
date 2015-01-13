@@ -14,6 +14,7 @@ require 'chroma/color_modes'
 
 # Palettes
 require 'chroma/harmonies'
+require 'chroma/palette_builder'
 
 # RGB Generators
 require 'chroma/rgb_generator'
@@ -48,6 +49,11 @@ module Chroma
 
     def name_from_hex(hex)
       hex_named_colors_map[hex]
+    end
+
+    def define_palette(name, &block)
+      raise "Palette `#{name}' already exists" if Harmonies.method_defined? name
+      PaletteBuilder.build(name, &block)
     end
 
     private
