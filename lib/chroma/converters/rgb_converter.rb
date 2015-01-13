@@ -22,7 +22,7 @@ module Chroma
           b = hue_to_rgb(p, q, h - 1/3.0) * 255
         end
 
-        ColorModes::Rgb.new(r, g, b)
+        ColorModes::Rgb.new(r, g, b, bound_alpha(@input.a))
       end
 
       def convert_hsv
@@ -43,7 +43,7 @@ module Chroma
         g = [t, v, v, q, p, p][mod] * 255
         b = [p, p, t, v, v, q][mod] * 255
 
-        ColorModes::Rgb.new(r, g, b)
+        ColorModes::Rgb.new(r, g, b, bound_alpha(@input.a))
       end
 
       private
