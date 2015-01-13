@@ -17,6 +17,13 @@ describe Chroma::Color, '#palette' do
     it 'keeps the same format' do
       expect(red.palette.complement).to all have_format :name
     end
+
+    context 'with option :as' do
+      it 'outputs the palette as an array of the string format' do
+        expect(red.palette.complement(as: :hex)).
+          to eq %w(#ff0000 #00ffff)
+      end
+    end
   end
 
   describe '#triad' do
@@ -26,6 +33,13 @@ describe Chroma::Color, '#palette' do
 
     it 'keeps the same format' do
       expect(red.palette.triad).to all have_format :name
+    end
+
+    context 'with option :as' do
+      it 'outputs the palette as an array of the string format' do
+        expect(red.palette.triad(as: :hex)).
+          to eq %w(#ff0000 #00ff00 #0000ff)
+      end
     end
   end
 
@@ -37,6 +51,13 @@ describe Chroma::Color, '#palette' do
     it 'keeps the same format' do
       expect(red.palette.tetrad).to all have_format :name
     end
+
+    context 'with option :as' do
+      it 'outputs the palette as an array of the string format' do
+        expect(red.palette.tetrad(as: :hex)).
+          to eq %w(#ff0000 #80ff00 #00ffff #7f00ff)
+      end
+    end
   end
 
   describe '#split_complement' do
@@ -46,6 +67,13 @@ describe Chroma::Color, '#palette' do
 
     it 'keeps the same format' do
       expect(red.palette.split_complement).to all have_format :name
+    end
+
+    context 'with option :as' do
+      it 'outputs the palette as an array of the string format' do
+        expect(red.palette.split_complement(as: :hex)).
+          to eq %w(#ff0000 #ccff00 #0066ff)
+      end
     end
   end
 
@@ -59,6 +87,13 @@ describe Chroma::Color, '#palette' do
       it 'keeps the same format' do
         expect(red.palette.analogous).to all have_format :name
       end
+
+      context 'with option :as' do
+        it 'outputs the palette as an array of the string format' do
+          expect(red.palette.analogous(as: :hex)).
+            to eq %w(#ff0000 #ff0066 #ff0033 #ff0000 #ff3300 #ff6600)
+        end
+      end
     end
 
     context 'with `results` argument' do
@@ -70,6 +105,13 @@ describe Chroma::Color, '#palette' do
       it 'keeps the same format' do
         expect(red.palette.analogous(results: 3)).to all have_format :name
       end
+
+      context 'with option :as' do
+        it 'outputs the palette as an array of the string format' do
+          expect(red.palette.analogous(results: 3, as: :hex)).
+            to eq %w(#ff0000 #ff001a #ff1a00)
+        end
+      end
     end
 
     context 'with `results` and `slices` arguments' do
@@ -80,6 +122,13 @@ describe Chroma::Color, '#palette' do
 
       it 'keeps the same format' do
         expect(red.palette.analogous(results: 3, slices: 10)).to all have_format :name
+      end
+
+      context 'with option :as' do
+        it 'outputs the palette as an array of the string format' do
+          expect(red.palette.analogous(results: 3, slices: 10, as: :hex)).
+            to eq %w(#ff0000 #ff004c #ff4d00)
+        end
       end
     end
   end
@@ -94,6 +143,13 @@ describe Chroma::Color, '#palette' do
       it 'keeps the same format' do
         expect(red.palette.monochromatic).to all have_format :name
       end
+
+      context 'with option :as' do
+        it 'outputs the palette as an array of the string format' do
+          expect(red.palette.monochromatic(as: :hex)).
+            to eq %w(#ff0000 #2a0000 #550000 #800000 #aa0000 #d40000)
+        end
+      end
     end
 
     context 'with `results` argument' do
@@ -104,6 +160,13 @@ describe Chroma::Color, '#palette' do
 
       it 'keeps the same format' do
         expect(red.palette.monochromatic(results: 3)).to all have_format :name
+      end
+
+      context 'with option :as' do
+        it 'outputs the palette as an array of the string format' do
+          expect(red.palette.monochromatic(results: 3, as: :hex)).
+            to eq %w(#ff0000 #550000 #aa0000)
+        end
       end
     end
   end
