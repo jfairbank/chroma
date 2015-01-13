@@ -4,7 +4,7 @@ module Chroma
       def bound01(n, max)
         is_percent = n.to_s.include? '%'
         n = [max, [0, n.to_f].max].min
-        n = (n * max).to_i / 100 if is_percent
+        n = (n * max).to_i / 100.0 if is_percent
 
         return 1 if (n - max).abs < 0.000001
 
