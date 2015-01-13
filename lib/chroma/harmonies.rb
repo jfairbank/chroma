@@ -27,7 +27,7 @@ module Chroma
 
       (results - 1).times.reduce([@color]) do |arr, n|
         hsl.h = (hsl.h + part) % 360
-        arr << Color.new(hsl)
+        arr << Color.new(hsl, @color.format)
       end
     end
 
@@ -36,7 +36,7 @@ module Chroma
       modification = 1.0 / results
 
       results.times.map do
-        Color.new(ColorModes::Hsv.new(h, s, v)).tap do
+        Color.new(ColorModes::Hsv.new(h, s, v), @color.format).tap do
           v = (v + modification) % 1
         end
       end
@@ -48,7 +48,7 @@ module Chroma
       h, s, l = @color.hsl
 
       degrees.map do |deg|
-        Color.new(ColorModes::Hsl.new((h + deg) % 360, s, l))
+        Color.new(ColorModes::Hsl.new((h + deg) % 360, s, l), @color.format)
       end
     end
   end
