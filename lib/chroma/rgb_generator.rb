@@ -23,12 +23,7 @@ module Chroma
       end
 
       def round(n)
-        if n < 1
-          n.round
-        else
-          #(n * 100).round / 100
-          n
-        end
+        n < 1 ? n.round : n
       end
     end
   end
