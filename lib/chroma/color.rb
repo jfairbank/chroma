@@ -11,6 +11,10 @@ module Chroma
       @format = format || gen_format
     end
 
+    def paint
+      self
+    end
+
     def eql?(other)
       self.class == other.class && self == other
     end
