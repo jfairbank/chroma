@@ -3,11 +3,11 @@ module Chroma
     class << self
       private
 
-      def build(*attrs)
-        Class.new do
-          attr_accessor *(attrs + [:a])
+      def build(name, *attrs)
+        class_eval <<-EOS
+          class #{name}
+            attr_accessor #{(attrs + [:a]).map{|attr| ":#{attr}"} * ', '}
 
-          class_eval <<-EOS
             def initialize(#{attrs * ', '}, a = 1)
               #{attrs.map{|attr| "@#{attr}"} * ', '}, @a = #{attrs * ', '}, a
             end
@@ -17,13 +17,13 @@ module Chroma
             end
 
             alias_method :to_ary, :to_a
-          EOS
-        end
+          end
+        EOS
       end
     end
 
-    Rgb = build :r, :g, :b
-    Hsl = build :h, :s, :l
-    Hsv = build :h, :s, :v
+    build 'Rgb', :r, :g, :b
+    build 'Hsl', :h, :s, :l
+    build 'Hsv', :h, :s, :v
   end
 end
