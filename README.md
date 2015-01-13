@@ -1,5 +1,7 @@
 # Chroma
 
+[![Gem Version](https://badge.fury.io/rb/chroma.svg)](http://badge.fury.io/rb/chroma)
+
 Chroma is a color manipulation and palette generation library. It is heavily
 inspired by and a very close Ruby port of the
 [tinycolor.js](https://bgrins.github.io/TinyColor/)
