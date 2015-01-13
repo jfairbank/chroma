@@ -1,6 +1,13 @@
 module Chroma
+  # Main module to generate an instance of {ColorModes::Rgb} from several
+  # possible inputs.
   module RgbGenerator
     class << self
+      # Generates an instance of {ColorModes::Rgb} as well as color format
+      #   symbol.
+      #
+      # @param input [String, ColorModes::Rgb, ColorModes::Hsl, ColorModes::Hsv]
+      # @return      [[ColorModes::Rgb, Symbol]]
       def generate_rgb_and_format(input)
         get_generator(input).generate.tap do |(rgb)|
           rgb.r = round(rgb.r)

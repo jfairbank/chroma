@@ -1,10 +1,15 @@
 module Chroma
   module Converters
+    # Class to convert a color mode to {ColorModes::Rgb}.
     class RgbConverter < Base
+      # Returns @input because it's the same color mode.
+      # @return [ColorModes::Rgb]
       def convert_rgb
         @input
       end
 
+      # Convert hsl to rgb.
+      # @return [ColorModes::Rgb]
       def convert_hsl
         h, s, l = @input
 
@@ -25,6 +30,8 @@ module Chroma
         ColorModes::Rgb.new(r, g, b, bound_alpha(@input.a))
       end
 
+      # Convert hsv to rgb.
+      # @return [ColorModes::Rgb]
       def convert_hsv
         h, s, v = @input
 

@@ -1,28 +1,81 @@
 module Chroma
   class Color
+    # Methods for serializing {Color} to different color mode string formats.
     module Serializers
+      # Convert to hsv string.
+      #
+      # @example
+      #   'red'.paint.to_hsv                  #=> 'hsv(0, 100%, 100%)'
+      #   'rgba(255, 0, 0, 0.5)'.paint.to_hsv #=> 'hsva(0, 100%, 100%, 0.5)'
+      #
+      # @return [String]
       def to_hsv
         to_hs(:v)
       end
 
+      # Convert to hsl string.
+      #
+      # @example
+      #   'red'.paint.to_hsl                  #=> 'hsl(0, 100%, 50%)'
+      #   'rgba(255, 0, 0, 0.5)'.paint.to_hsl #=> 'hsla(0, 100%, 50%, 0.5)'
+      #
+      # @return [String]
       def to_hsl
         to_hs(:l)
       end
 
+      # Convert to hexadecimal string.
+      #
+      # @example
+      #   'red'.paint.to_hex                  #=> '#ff0000'
+      #   'red'.paint.to_hex(true)            #=> '#f00'
+      #   'rgba(255, 0, 0, 0.5)'.paint.to_hex #=> '#ff0000'
+      #
+      # @param allow_3 [true, false] output 3-character hexadecimal
+      #   if possible
+      # @return [String]
       def to_hex(allow_3 = false)
         "##{to_basic_hex(allow_3)}"
       end
 
+      # Convert to 8-character hexadecimal string. The highest order byte
+      #   (left most hexadecimal pair represents the alpha value).
+      #
+      # @example
+      #   'red'.paint.to_hex                  #=> '#ffff0000'
+      #   'rgba(255, 0, 0, 0.5)'.paint.to_hex #=> '#80ff0000'
+      #
+      # @return [String]
       def to_hex8
         "##{to_basic_hex8}"
       end
 
+      # Convert to rgb string.
+      #
+      # @example
+      #   'red'.paint.to_rgb                  #=> 'rgb(255, 0, 0)'
+      #   'rgba(255, 0, 0, 0.5)'.paint.to_rgb #=> 'rgb(255, 0, 0, 0.5)'
+      #
+      # @return [String]
       def to_rgb
         middle = @rgb.to_a[0..2].map(&:round).join(', ')
 
         with_alpha(:rgb, middle)
       end
 
+      # Convert to named color if possible. If a color name can't be found, it
+      # returns `'<unknown>'` or the hexadecimal string based on the value of
+      # `hex_for_unknown`.
+      #
+      # @example
+      #   'red'.paint.to_name                  #=> 'red'
+      #   'rgba(255, 0, 0, 0.5)'.paint.to_name #=> '<unknown>'
+      #   '#00f'.paint.to_name                 #=> 'blue'
+      #   '#123'.paint.to_name(true)           #=> '#112233'
+      #
+      # @param hex_for_unknown [true, false] determine how unknown color names
+      #   should be returned
+      # @return [String]
       def to_name(hex_for_unknown = false)
         return 'transparent' if alpha.zero?
 
@@ -37,6 +90,16 @@ module Chroma
         end
       end
 
+      # Convert to a string based on the color format.
+      #
+      # @example
+      #   'red'.paint.to_s             #=> 'red'
+      #   'rgb(255, 0, 0)'.paint.to_s  #=> 'rgb(255, 0, 0)'
+      #   '#f00'.paint.to_s            #=> '#f00'
+      #   '#80ff0000'.paint.to_s(:rgb) #=> 'rgba(255, 0, 0, 0.5)'
+      #
+      # @param format [Symbol] the color format
+      # @return       [String]
       def to_s(format = @format)
         use_alpha = alpha < 1 && alpha >= 0 && /^hex(3|6)?$/ =~ format
 
@@ -56,14 +119,20 @@ module Chroma
 
       alias_method :inspect, :to_s
 
+      # Converts to an instance of {ColorModes::Hsv}
+      # @return [ColorModes::Hsv]
       def hsv
         Converters::HsvConverter.convert_rgb(@rgb)
       end
 
+      # Converts to an instance of {ColorModes::Hsl}
+      # @return [ColorModes::Hsl]
       def hsl
         Converters::HslConverter.convert_rgb(@rgb)
       end
 
+      # Converts to an instance of {ColorModes::Rgb}
+      # @return [ColorModes::Rgb]
       attr_reader :rgb
 
       private

@@ -1,6 +1,11 @@
 module Chroma
   module RgbGenerator
     class FromString < Base
+      # Returns the regex matchers and rgb generation classes for various
+      # string color formats.
+      #
+      # @api private
+      # @return [Hash<Symbol, Hash>]
       def self.matchers
         @matchers ||= begin
           # TinyColor.js matchers
@@ -28,10 +33,14 @@ module Chroma
         end
       end
 
+      # @param format [Symbol] unused
+      # @param input  [String] input to parse
       def initialize(format, input)
         @input = normalize_input(input)
       end
 
+      # Generates a {ColorModes::Rgb}.
+      # @return [ColorModes::Rgb]
       def generate
         get_generator.generate
       end

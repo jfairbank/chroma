@@ -38,20 +38,75 @@ require 'chroma/converters/hsv_converter'
 # Extensions
 require 'chroma/extensions/string'
 
+# The main module.
 module Chroma
   class << self
+    # Returns a new instance of color. Supports hexadecimal, rgb, rgba, hsl,
+    # hsla, hsv, hsva, and named color formats.
+    #
+    # @api public
+    #
+    # @example
+    #   Chroma.paint('red')
+    #   Chroma.paint('#f00')
+    #   Chroma.paint('#ff0000')
+    #   Chroma.paint('rgb(255, 0, 0)')
+    #   Chroma.paint('hsl(0, 100%, 50%)')
+    #   Chroma.paint('hsv(0, 100%, 100%)')
+    #
+    # @param input [String] the color
+    # @return      [Color]  an instance of {Color}
     def paint(input)
       Color.new(input)
     end
 
+    # Returns the hexadecimal string representation of a named color and nil
+    # if no match is found. Favors 3-character hexadecimal if possible.
+    #
+    # @example
+    #   Chroma.hex_from_name('red')       #=> 'f00'
+    #   Chroma.hex_from_name('aliceblue') #=> 'f0f8ff'
+    #   Chroma.hex_from_name('foo')       #=> nil
+    #
+    # @param name [String]      the color name
+    # @return     [String, nil] the color as a string hexadecimal or nil
     def hex_from_name(name)
       named_colors_map[name]
     end
 
+    # Returns the color name of a hexadecimal color if available and nil if no
+    # match is found. Requires 3-character hexadecimal input for applicable
+    # colors.
+    #
+    # @example
+    #   Chroma.name_from_hex('f00')    #=> 'red'
+    #   Chroma.name_from_hex('f0f8ff') #=> 'aliceblue'
+    #   Chroma.name_from_hex('123123') #=> nil
+    #
+    # @param hex [String]      the hexadecimal color
+    # @return    [String, nil] the color name or nil
     def name_from_hex(hex)
       hex_named_colors_map[hex]
     end
 
+    # Defines a custom palette for use by {Color#palette}. Uses a DSL inside
+    # `block` that mirrors the methods in {Color::Modifiers}.
+    #
+    # @example
+    #   'red'.paint.palette.respond_to? :my_palette #=> false
+    #
+    #   Chroma.define_palette :my_palette do
+    #     spin 60
+    #     spin 120
+    #     spin 240
+    #   end
+    #
+    #   'red'.paint.palette.respond_to? :my_palette #=> true
+    #
+    # @param name  [Symbol, String]              the name of the custom palette
+    # @param block [Proc]                        the palette definition block
+    # @raise       [Errors::PaletteDefinedError] if the palette is already defined
+    # @return      [Symbol, String]              the name of the custom palette
     def define_palette(name, &block)
       if Harmonies.method_defined? name
         raise Errors::PaletteDefinedError, "Palette `#{name}' already exists"
