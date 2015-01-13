@@ -20,11 +20,11 @@ module Chroma
     end
 
     def ==(other)
-      to_hex_s == other.to_hex_s
+      to_hex == other.to_hex
     end
 
     def complement
-      hsl = to_hsl
+      hsl = self.hsl
       hsl.h = (hsl.h + 180) % 360
       Color.new(hsl)
     end
@@ -32,10 +32,6 @@ module Chroma
     def palette
       Harmonies.new(self)
     end
-
-    protected
-
-    attr_reader :rgb
 
     private
 

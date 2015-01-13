@@ -2,7 +2,7 @@ module Chroma
   class Color
     module Modifiers
       def lighten(amount = 10)
-        hsl = to_hsl
+        hsl = self.hsl
         hsl.l = clamp01(hsl.l + amount / 100.0)
         self.class.new(hsl, @format)
       end
@@ -20,19 +20,19 @@ module Chroma
       end
 
       def darken(amount = 10)
-        hsl = to_hsl
+        hsl = self.hsl
         hsl.l = clamp01(hsl.l - amount / 100.0)
         self.class.new(hsl, @format)
       end
 
       def desaturate(amount = 10)
-        hsl = to_hsl
+        hsl = self.hsl
         hsl.s = clamp01(hsl.s - amount / 100.0)
         self.class.new(hsl, @format)
       end
 
       def saturate(amount = 10)
-        hsl = to_hsl
+        hsl = self.hsl
         hsl.s = clamp01(hsl.s + amount / 100.0)
         self.class.new(hsl, @format)
       end
@@ -42,7 +42,7 @@ module Chroma
       end
 
       def spin(amount)
-        hsl = to_hsl
+        hsl = self.hsl
         hue = (hsl.h.round + amount) % 360
         hsl.h = hue < 0 ? 360 + hue : hue
         self.class.new(hsl, @format)

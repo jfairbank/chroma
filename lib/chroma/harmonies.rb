@@ -21,7 +21,7 @@ module Chroma
     end
 
     def analogous(results = 6, slices = 30)
-      hsl = @color.to_hsl
+      hsl = @color.hsl
       part = 360 / slices
       hsl.h = ((hsl.h - (part * results >> 1)) + 720) % 360
 
@@ -32,7 +32,7 @@ module Chroma
     end
 
     def monochromatic(results = 6)
-      h, s, v = @color.to_hsv
+      h, s, v = @color.hsv
       modification = 1.0 / results
 
       results.times.map do
@@ -45,7 +45,7 @@ module Chroma
     private
 
     def hsl_map(degrees)
-      h, s, l = @color.to_hsl
+      h, s, l = @color.hsl
 
       degrees.map do |deg|
         Color.new(ColorModes::Hsl.new((h + deg) % 360, s, l))
