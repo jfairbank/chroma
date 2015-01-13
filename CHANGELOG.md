@@ -1,5 +1,7 @@
-### v0.0.1.alpha.2
+### [v0.0.1.alpha.2] - 2015-01-13
+
 **Bug Fixes:**
+
 * Fixed bug with number of arguments passed to generator classes in RgbGenerator. (#1)
 * Make `FromHexStringValues.from_hex8` take alpha as second parameter instead of last.
   Fixes incorrect color generation from hex8. (#6)
@@ -14,6 +16,7 @@
   wrong alpha value. (#15)
 
 **Method Changes:**
+
 * Add optional `hex_for_unknown` parameter to `Color::Serializers#to_name`.
   If true, it allows `to_name` to default to hex string if name is not found
   instead of returning `'<unknown>'`. (#2)
@@ -35,3 +38,7 @@
   * `to_rgb`    -> `rgb` (moved attr_reader to serializers and made public)
   * `to_rgb_s`  -> `to_rgb`
   * Removed `to_name_s` alias
+
+### [v0.0.1.alpha.1] - 2015-01-11
+
+* Initial release
