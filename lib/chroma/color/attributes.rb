@@ -1,6 +1,8 @@
 module Chroma
   class Color
     module Attributes
+      attr_reader :format
+
       def dark?
         brightness < 128
       end
