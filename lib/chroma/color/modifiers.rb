@@ -37,9 +37,11 @@ module Chroma
         self.class.new(hsl, @format)
       end
 
-      def greyscale
+      def grayscale
         desaturate(100)
       end
+
+      alias_method :greyscale, :grayscale
 
       def spin(amount)
         hsl = self.hsl
