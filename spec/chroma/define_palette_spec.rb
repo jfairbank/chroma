@@ -30,4 +30,10 @@ describe Chroma, '.define_palette' do
     expect(red.palette.foo).
       to generate_palette %w(#ff0000 #ffff00 #00ffff #ffff33 #808080)
   end
+
+  it 'keeps the same format' do
+    add_palette
+
+    expect('red'.paint.palette.foo).to all have_format :name
+  end
 end
