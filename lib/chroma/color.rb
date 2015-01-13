@@ -26,7 +26,7 @@ module Chroma
     def complement
       hsl = self.hsl
       hsl.h = (hsl.h + 180) % 360
-      Color.new(hsl)
+      self.class.new(hsl, @format)
     end
 
     def palette
