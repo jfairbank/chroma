@@ -1,5 +1,6 @@
 # General
 require 'chroma/version'
+require 'chroma/errors'
 require 'yaml'
 
 # Modules
@@ -52,7 +53,10 @@ module Chroma
     end
 
     def define_palette(name, &block)
-      raise "Palette `#{name}' already exists" if Harmonies.method_defined? name
+      if Harmonies.method_defined? name
+        raise Errors::PaletteDefinedError, "Palette `#{name}' already exists"
+      end
+
       PaletteBuilder.build(name, &block)
     end
 
