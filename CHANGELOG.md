@@ -1,3 +1,29 @@
+### [v0.0.1.alpha.3] - 2015-01-13
+
+**Bug Fixes:**
+
+* Fix bug where `Color#complement` didn't return a color of the same format.
+* Fix bug where palettes did not have the same format as the seed color. (#16)
+* Fix bug where the helper method `bound01` was not always producing accurate
+  results for percentages due to integer division.
+* Fix bug where a `Color` created from an rgba string
+  (e.g. `'rgba(255, 0, 0, 0.5).paint'`) was not serializing to an rgba string
+  from `to_s`. (#17)
+
+**Method Changes:**
+
+* Add `Color#format` method to return `@format` instance variable.
+* Change arguments for `analogous` and `monochromatic` to option arguments.
+* Add ability to output palette as an array of color format strings via the
+  `:as` option. (#10)
+* On `Color` rename `greyscale` to `grayscale` and alias `greyscale` back
+  to `grayscale`.
+
+**Miscellaneous Changes:**
+
+* Introduced custom errors and replaced `raise` calls with them.
+* Added API doc headers. (#4)
+
 ### [v0.0.1.alpha.2] - 2015-01-13
 
 **Bug Fixes:**
