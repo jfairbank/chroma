@@ -1,3 +1,20 @@
+### v0.0.1 - 2015-01-14
+
+**Method Changes:**
+
+* Renamed options for analogous palette method.
+  * `:results` -> `:size`
+  * `:slices` -> `:slice_by`
+* Renamed option for monochromatic palette method.
+  * `:results` -> `:size`
+
+**Miscellaneous Changes:**
+
+* Add remaining specs for public API.
+* Add "transparent" as color name for `Chroma.paint`.
+* Minor API doc example fixes.
+* Add public API usage examples to README.
+
 ### [v0.0.1.alpha.3] - 2015-01-13
 
 **Bug Fixes:**
