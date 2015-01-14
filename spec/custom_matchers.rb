@@ -11,3 +11,11 @@ RSpec::Matchers.define :have_format do |expected|
     actual.format == expected
   end
 end
+
+RSpec::Matchers.define :be_dark do
+  match { |value| value.dark? }
+end
+
+RSpec::Matchers.define :be_light do
+  match { |value| value.light? }
+end
