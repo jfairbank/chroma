@@ -1,0 +1,10 @@
+langage: ruby
+
+rvm:
+  - 2.2.0
+  - 2.1.5
+  - 1.9.3
+  - jruby
+
+script:
+  - rake spec

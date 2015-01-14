@@ -1,6 +1,7 @@
 # Chroma
 
 [![Gem Version](https://badge.fury.io/rb/chroma.svg)](http://badge.fury.io/rb/chroma)
+[![Build Status](https://travis-ci.org/jfairbank/chroma.svg?branch=master)](https://travis-ci.org/jfairbank/chroma)
 
 Chroma is a color manipulation and palette generation library. It is heavily
 inspired by and a very close Ruby port of the
