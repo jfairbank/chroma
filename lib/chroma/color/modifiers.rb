@@ -19,14 +19,14 @@ module Chroma
       # Brightens the color by the given `amount`.
       #
       # @example
-      #   'red'.paint.brighten     #=> #ff1919
+      #   'red'.paint.brighten     #=> #ff1a1a
       #   'red'.paint.brighten(20) #=> #ff3333
       #
       # @param amount [Fixnum]
       # @return       [Color]
       def brighten(amount = 10)
         # Don't include alpha
-        rgb = @rgb.to_a[0..2].map(&:round)
+        rgb = @rgb.to_a[0..2]
         amount = (255 * (-amount / 100.0)).round
 
         rgb.map! do |n|
