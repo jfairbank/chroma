@@ -65,26 +65,26 @@ module Chroma
     # Generate an analogous palette.
     #
     # @example
-    #   'red'.paint.palette.analogous                         #=> [red, #ff0066, #ff0033, red, #ff3300, #ff6600]
-    #   'red'.paint.palette.analogous(as: :hex)               #=> ['#f00', '#f06', '#f03', '#f00', '#f30', '#f60']
-    #   'red'.paint.palette.analogous(results: 3)             #=> [red, #ff001a, #ff1a00]
-    #   'red'.paint.palette.analogous(results: 3, slices: 60) #=> [red, #ff000d, #ff0d00]
+    #   'red'.paint.palette.analogous                        #=> [red, #ff0066, #ff0033, red, #ff3300, #ff6600]
+    #   'red'.paint.palette.analogous(as: :hex)              #=> ['#f00', '#f06', '#f03', '#f00', '#f30', '#f60']
+    #   'red'.paint.palette.analogous(size: 3)               #=> [red, #ff001a, #ff1a00]
+    #   'red'.paint.palette.analogous(size: 3, slice_by: 60) #=> [red, #ff000d, #ff0d00]
     #
     # @param options [Hash]
-    # @option options :results [Symbol] (6) number of results to return
-    # @option options :slices  [Symbol] (30)
+    # @option options :size     [Symbol] (6) number of results to return
+    # @option options :slice_by [Symbol] (30)
     #   the angle in degrees to slice the hue circle per color
-    # @option options :as      [Symbol] (nil) optional format to output colors as strings
+    # @option options :as       [Symbol] (nil) optional format to output colors as strings
     # @return [Array<Color>, Array<String>] depending on presence of `options[:as]`
     def analogous(options = {})
-      results = options[:results] || 6
-      slices = options[:slices] || 30
+      size = options[:size] || 6
+      slices = options[:slice_by] || 30
 
       hsl = @color.hsl
       part = 360 / slices
-      hsl.h = ((hsl.h - (part * results >> 1)) + 720) % 360
+      hsl.h = ((hsl.h - (part * size >> 1)) + 720) % 360
 
-      palette = (results - 1).times.reduce([@color]) do |arr, n|
+      palette = (size - 1).times.reduce([@color]) do |arr, n|
         hsl.h = (hsl.h + part) % 360
         arr << Color.new(hsl, @color.format)
       end
@@ -95,21 +95,21 @@ module Chroma
     # Generate a monochromatic palette.
     #
     # @example
-    #   'red'.paint.palette.monochromatic             #=> [red, #2a0000, #550000, maroon, #aa0000, #d40000]
-    #   'red'.paint.palette.monochromatic(as: :hex)   #=> ['#ff0000', '#2a0000', '#550000', '#800000', '#aa0000', '#d40000']
-    #   'red'.paint.palette.monochromatic(results: 3) #=> [red, #550000, #aa0000]
+    #   'red'.paint.palette.monochromatic           #=> [red, #2a0000, #550000, maroon, #aa0000, #d40000]
+    #   'red'.paint.palette.monochromatic(as: :hex) #=> ['#ff0000', '#2a0000', '#550000', '#800000', '#aa0000', '#d40000']
+    #   'red'.paint.palette.monochromatic(size: 3)  #=> [red, #550000, #aa0000]
     #
     # @param options [Hash]
-    # @option options :results [Symbol] (6) number of results to return
-    # @option options :as      [Symbol] (nil) optional format to output colors as strings
+    # @option options :size [Symbol] (6) number of results to return
+    # @option options :as   [Symbol] (nil) optional format to output colors as strings
     # @return [Array<Color>, Array<String>] depending on presence of `options[:as]`
     def monochromatic(options = {})
-      results = options[:results] || 6
+      size = options[:size] || 6
 
       h, s, v = @color.hsv
-      modification = 1.0 / results
+      modification = 1.0 / size
 
-      palette = results.times.map do
+      palette = size.times.map do
         Color.new(ColorModes::Hsv.new(h, s, v), @color.format).tap do
           v = (v + modification) % 1
         end

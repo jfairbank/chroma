@@ -96,37 +96,37 @@ describe Chroma::Color, '#palette' do
       end
     end
 
-    context 'with `results` argument' do
+    context 'with `size` argument' do
       it 'returns the analogous palette' do
-        expect(red.palette.analogous(results: 3)).
+        expect(red.palette.analogous(size: 3)).
           to generate_palette %w(#f00 #ff001a #ff1a00)
       end
 
       it 'keeps the same format' do
-        expect(red.palette.analogous(results: 3)).to all have_format :name
+        expect(red.palette.analogous(size: 3)).to all have_format :name
       end
 
       context 'with option :as' do
         it 'outputs the palette as an array of the string format' do
-          expect(red.palette.analogous(results: 3, as: :hex)).
+          expect(red.palette.analogous(size: 3, as: :hex)).
             to eq %w(#ff0000 #ff001a #ff1a00)
         end
       end
     end
 
-    context 'with `results` and `slices` arguments' do
+    context 'with `size` and `slice_by` arguments' do
       it 'returns the analogous palette' do
-        expect(red.palette.analogous(results: 3, slices: 10)).
+        expect(red.palette.analogous(size: 3, slice_by: 10)).
           to generate_palette %w(#f00 #ff004c #ff4d00)
       end
 
       it 'keeps the same format' do
-        expect(red.palette.analogous(results: 3, slices: 10)).to all have_format :name
+        expect(red.palette.analogous(size: 3, slice_by: 10)).to all have_format :name
       end
 
       context 'with option :as' do
         it 'outputs the palette as an array of the string format' do
-          expect(red.palette.analogous(results: 3, slices: 10, as: :hex)).
+          expect(red.palette.analogous(size: 3, slice_by: 10, as: :hex)).
             to eq %w(#ff0000 #ff004c #ff4d00)
         end
       end
@@ -152,19 +152,19 @@ describe Chroma::Color, '#palette' do
       end
     end
 
-    context 'with `results` argument' do
+    context 'with `size` argument' do
       it 'returns the monochromatic palette' do
-        expect(red.palette.monochromatic(results: 3)).
+        expect(red.palette.monochromatic(size: 3)).
           to generate_palette %w(#f00 #500 #a00)
       end
 
       it 'keeps the same format' do
-        expect(red.palette.monochromatic(results: 3)).to all have_format :name
+        expect(red.palette.monochromatic(size: 3)).to all have_format :name
       end
 
       context 'with option :as' do
         it 'outputs the palette as an array of the string format' do
-          expect(red.palette.monochromatic(results: 3, as: :hex)).
+          expect(red.palette.monochromatic(size: 3, as: :hex)).
             to eq %w(#ff0000 #550000 #aa0000)
         end
       end
