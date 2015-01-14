@@ -4,7 +4,7 @@ module Chroma
       # @param format [Symbol] color format
       # @param rgb    [ColorModes::Rgb]
       def initialize(format, rgb)
-        @format = format || :rgb
+        @format = format
         @rgb = rgb
       end
 

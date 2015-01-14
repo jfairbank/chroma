@@ -7,7 +7,7 @@ module Chroma
       # @param b      [String, Numeric] blue value
       # @param a      [String, Numeric] alpha value
       def initialize(format, r, g, b, a = 1)
-        @format = format
+        @format = format || :rgb
         @r, @g, @b, @a = r, g, b, a
       end
 
