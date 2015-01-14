@@ -9,9 +9,9 @@ inspired by and a very close Ruby port of the
 library. Many thanks to [Brian Grinstead](http://www.briangrinstead.com/blog/)
 for his hard work on that library.
 
-Please don't hesitate to examine the code and make issues or pull requests
-where you feel it is necessary. Please refer to the
-[Contributing](#contributing) section below.
+Please don't hesitate to examine the code and make issues, feature requests,
+or pull requests. Please refer to the [Contributing](#contributing) section
+below.
 
 ## Installation
 
