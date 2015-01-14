@@ -81,7 +81,7 @@ module Chroma
       # Converts the color to grayscale.
       #
       # @example
-      #   'green'.paint.greyscale #=> #404040
+      #   'green'.paint.grayscale #=> #404040
       #
       # @return [Color]
       def grayscale
@@ -93,7 +93,7 @@ module Chroma
       # Spins around the hue color wheel by `amount` in degrees.
       #
       # @example
-      #   'red'.paint.spin(30) #=> #ff80000
+      #   'red'.paint.spin(30) #=> #ff8000
       #   'red'.paint.spin(60) #=> yellow
       #   'red'.paint.spin(90) #=> #80ff00
       #
