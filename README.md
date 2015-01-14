@@ -9,12 +9,6 @@ inspired by and a very close Ruby port of the
 library. Many thanks to [Brian Grinstead](http://www.briangrinstead.com/blog/)
 for his hard work on that library.
 
-Chroma is in alpha stage at the moment. Most of the API methods from tinycolor
-have been ported over with a few exceptions. However, I will be working on
-cleaning up the API where needed, adding docs and examples, and adding tests
-before a first release. Because this is currently in alpha, please be
-prepared for possible API changes or bugs.
-
 Please don't hesitate to examine the code and make issues or pull requests
 where you feel it is necessary. Please refer to the
 [Contributing](#contributing) section below.
@@ -24,7 +18,7 @@ where you feel it is necessary. Please refer to the
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'chroma', '0.0.1.alpha.3'
+gem 'chroma'
 ```
 
 And then execute:
@@ -33,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install chroma --pre
+    $ gem install chroma
 
 ## Creating Colors
 
