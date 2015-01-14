@@ -50,6 +50,8 @@ module Chroma
       def get_generator
         if color = Chroma.hex_from_name(@input)
           format = :name
+        elsif @input == 'transparent'
+          return FromRgbValues.new(:name, 0, 0, 0, 0)
         else
           format = nil
           color = @input
