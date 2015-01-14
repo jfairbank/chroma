@@ -23,7 +23,7 @@ where you feel it is necessary. Please refer to the
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'chroma', '0.0.1.alpha.2'
+gem 'chroma', '0.0.1.alpha.3'
 ```
 
 And then execute:
