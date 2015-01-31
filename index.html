@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Chroma by jfairbank</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Chroma</h1>
+          <h2>Ruby gem for color manipulation and palette generation</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/jfairbank/chroma/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/jfairbank/chroma/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/jfairbank/chroma" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="chroma" class="anchor" href="#chroma" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chroma</h1>
+
+<p><a href="http://badge.fury.io/rb/chroma"><img src="https://badge.fury.io/rb/chroma.svg" alt="Gem Version"></a>
+<a href="https://travis-ci.org/jfairbank/chroma"><img src="https://travis-ci.org/jfairbank/chroma.svg?branch=master" alt="Build Status"></a></p>
+
+<p>Chroma is a color manipulation and palette generation library. It is heavily
+inspired by and a very close Ruby port of the
+<a href="https://bgrins.github.io/TinyColor/">tinycolor.js</a>
+library. Many thanks to <a href="http://www.briangrinstead.com/blog/">Brian Grinstead</a>
+for his hard work on that library.</p>
+
+<p>Please don't hesitate to examine the code and make issues, feature requests,
+or pull requests. Please refer to the <a href="#contributing">Contributing</a> section
+below.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>chroma<span class="pl-pds">'</span></span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install chroma
+</code></pre>
+
+<h2>
+<a id="creating-colors" class="anchor" href="#creating-colors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating Colors</h2>
+
+<p>Colors are created via the <code>Chroma.paint</code> method. It expects any one of
+many possible color formats as a string, including names, hexadecimal, rgb,
+hsl, and hsv. As a convenience, a <code>String#paint</code> is also available for more
+succinct color creation.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># With Chroma.paint</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>                       <span class="pl-c"># named colors</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>#00ff00<span class="pl-pds">'</span></span>                   <span class="pl-c"># 6 character hexadecimal</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>#00f<span class="pl-pds">'</span></span>                      <span class="pl-c"># 3 character hexadecimal</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>rgb(255, 255, 0)<span class="pl-pds">'</span></span>          <span class="pl-c"># rgb</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 255, 0, 0.5)<span class="pl-pds">'</span></span>    <span class="pl-c"># rgba</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>hsl(60, 100%, 50%)<span class="pl-pds">'</span></span>        <span class="pl-c"># hsl with percentages</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>hsl(60, 1, 0.5)<span class="pl-pds">'</span></span>           <span class="pl-c"># hsl with decimals</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>hsla(60, 100%, 50%, 0.5)<span class="pl-pds">'</span></span>  <span class="pl-c"># hsla</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>hsv(60, 100%, 50%)<span class="pl-pds">'</span></span>        <span class="pl-c"># hsv with percentages</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>hsv(60, 1, 0.5)<span class="pl-pds">'</span></span>           <span class="pl-c"># hsv with decimals</span>
+<span class="pl-s3">Chroma</span>.paint <span class="pl-s1"><span class="pl-pds">'</span>hsva(60, 100%, 50%, 0.75)<span class="pl-pds">'</span></span> <span class="pl-c"># hsva</span>
+
+<span class="pl-c"># With String#paint</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>#00ff00<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>#00f<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>rgb(255, 255, 0)<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 255, 0, 0.5)<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>hsl(60, 100%, 50%)<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>hsla(60, 100%, 50%, 0.5)<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>hsv(60, 100%, 50%)<span class="pl-pds">'</span></span>.paint
+<span class="pl-s1"><span class="pl-pds">'</span>hsva(60, 100%, 50%. 0.5)<span class="pl-pds">'</span></span>.paint</pre></div>
+
+<h2>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p>Chroma's major strength is manipulating colors and generating color palettes,
+which allows you to easily generate dynamic colors, dynamic themes for a web
+application, and more.</p>
+
+<h2>
+<a id="color-manipulation" class="anchor" href="#color-manipulation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Color Manipulation</h2>
+
+<h4>
+<a id="lighten" class="anchor" href="#lighten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lighten</h4>
+
+<p>Lighten the color by a given amount. Defaults to 10.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.lighten     <span class="pl-c">#=&gt; #ff3333</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.lighten(<span class="pl-c1">20</span>) <span class="pl-c">#=&gt; #ff6666</span></pre></div>
+
+<h4>
+<a id="brighten" class="anchor" href="#brighten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Brighten</h4>
+
+<p>Brighten the color by a given amount. Defaults to 10.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.brighten     <span class="pl-c">#=&gt; #ff1a1a</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.brighten(<span class="pl-c1">20</span>) <span class="pl-c">#=&gt; #ff3333</span></pre></div>
+
+<h4>
+<a id="darken" class="anchor" href="#darken" aria-hidden="true"><span class="octicon octicon-link"></span></a>Darken</h4>
+
+<p>Darken the color by a given amount. Defaults to 10.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.darken     <span class="pl-c">#=&gt; #cc0000</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.darken(<span class="pl-c1">20</span>) <span class="pl-c">#=&gt; #990000</span></pre></div>
+
+<h4>
+<a id="desaturate" class="anchor" href="#desaturate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Desaturate</h4>
+
+<p>Desaturate the color by a given amount. Defaults to 10.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.desaturate     <span class="pl-c">#=&gt; #f20d0d</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.desaturate(<span class="pl-c1">20</span>) <span class="pl-c">#=&gt; #e61919</span></pre></div>
+
+<h4>
+<a id="saturate" class="anchor" href="#saturate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Saturate</h4>
+
+<p>Saturate the color by a given amount. Defaults to 10.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>#123<span class="pl-pds">'</span></span>.paint.saturate     <span class="pl-c">#=&gt; #0e2236</span>
+<span class="pl-s1"><span class="pl-pds">'</span>#123<span class="pl-pds">'</span></span>.paint.saturate(<span class="pl-c1">20</span>) <span class="pl-c">#=&gt; #0a223a</span></pre></div>
+
+<h4>
+<a id="grayscale" class="anchor" href="#grayscale" aria-hidden="true"><span class="octicon octicon-link"></span></a>Grayscale</h4>
+
+<p>Convert the color to grayscale.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>green<span class="pl-pds">'</span></span>.paint.grayscale <span class="pl-c">#=&gt; #404040</span>
+
+<span class="pl-c"># greyscale is an alias</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.greyscale   <span class="pl-c">#=&gt; #808080</span></pre></div>
+
+<h4>
+<a id="spin" class="anchor" href="#spin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spin</h4>
+
+<p>Spin a given amount in degrees around the hue wheel.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.spin(<span class="pl-c1">30</span>) <span class="pl-c">#=&gt; #ff8000</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.spin(<span class="pl-c1">60</span>) <span class="pl-c">#=&gt; yellow</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.spin(<span class="pl-c1">90</span>) <span class="pl-c">#=&gt; #80ff00</span></pre></div>
+
+<h2>
+<a id="generating-palettes" class="anchor" href="#generating-palettes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generating Palettes</h2>
+
+<p>Chroma's most powerful feature is palette generation. You can use the default
+palettes available or even create your own custom palettes.</p>
+
+<p>Palette methods are available via <code>Color#palette</code> and by default output an
+array of colors. If you want the underlying color strings, you can pass in
+the desired format via the <code>:as</code> option.</p>
+
+<h4>
+<a id="available-formats" class="anchor" href="#available-formats" aria-hidden="true"><span class="octicon octicon-link"></span></a>Available Formats</h4>
+
+<ul>
+<li>name</li>
+<li>rgb</li>
+<li>hex</li>
+<li>hex6 (alias for hex)</li>
+<li>hex3</li>
+<li>hex8 (includes the alpha value in the highest order byte)</li>
+<li>hsl</li>
+<li>hsv</li>
+</ul>
+
+<h4>
+<a id="complement" class="anchor" href="#complement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Complement</h4>
+
+<p>Generate a complement palette.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.complement            <span class="pl-c">#=&gt; [red, cyan]</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.complement(<span class="pl-c1">as:</span> <span class="pl-c1">:name</span>) <span class="pl-c">#=&gt; ['red', 'cyan']</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.complement(<span class="pl-c1">as:</span> <span class="pl-c1">:hex</span>)  <span class="pl-c">#=&gt; ['#ff0000', '#00ffff']</span></pre></div>
+
+<h4>
+<a id="triad" class="anchor" href="#triad" aria-hidden="true"><span class="octicon octicon-link"></span></a>Triad</h4>
+
+<p>Generate a triad palette.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.triad            <span class="pl-c">#=&gt; [red, lime, blue]</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.triad(<span class="pl-c1">as:</span> <span class="pl-c1">:name</span>) <span class="pl-c">#=&gt; ['red', 'lime', 'blue']</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.triad(<span class="pl-c1">as:</span> <span class="pl-c1">:hex</span>)  <span class="pl-c">#=&gt; ['#ff0000', '#00ff00', '#0000ff']</span></pre></div>
+
+<h4>
+<a id="tetrad" class="anchor" href="#tetrad" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tetrad</h4>
+
+<p>Generate a tetrad palette.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.tetrad
+<span class="pl-c">#=&gt; [red, #80ff00, cyan, #7f00ff]</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.tetrad(<span class="pl-c1">as:</span> <span class="pl-c1">:name</span>)
+<span class="pl-c">#=&gt; ['red', '#80ff00', 'cyan', '#7f00ff']</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.tetrad(<span class="pl-c1">as:</span> <span class="pl-c1">:hex</span>)
+<span class="pl-c">#=&gt; ['#ff0000', '#80ff00', '#00ffff', '#7f00ff']</span></pre></div>
+
+<h4>
+<a id="split-complement" class="anchor" href="#split-complement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Split Complement</h4>
+
+<p>Generate a split complement palette.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.split_complement
+<span class="pl-c">#=&gt; [red, #ccff00, #0066ff]</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.split_complement(<span class="pl-c1">as:</span> <span class="pl-c1">:name</span>)
+<span class="pl-c">#=&gt; ['red', '#ccff00', '#0066ff']</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.split_complement(<span class="pl-c1">as:</span> <span class="pl-c1">:hex</span>)
+<span class="pl-c">#=&gt; ['#ff0000', '#ccff00', '#0066ff']</span></pre></div>
+
+<h4>
+<a id="analogous" class="anchor" href="#analogous" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analogous</h4>
+
+<p>Generate an analogous palette. Pass in a <code>:size</code> option to specify the size
+of the palette (defaults to 6). Pass in a <code>:slice_by</code> option to specify the
+angle size to slice into the hue wheel (defaults to 30 degrees).</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.analogous
+<span class="pl-c">#=&gt; [red, #ff0066, #ff0033, red, #ff3300, #ff6600]</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.analogous(<span class="pl-c1">as:</span> <span class="pl-c1">:hex</span>)
+<span class="pl-c">#=&gt; ['#f00', '#f06', '#f03', '#f00', '#f30', '#f60']</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.analogous(<span class="pl-c1">size:</span> <span class="pl-c1">3</span>)
+<span class="pl-c">#=&gt; [red, #ff001a, #ff1a00]</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.analogous(<span class="pl-c1">size:</span> <span class="pl-c1">3</span>, <span class="pl-c1">slice_by:</span> <span class="pl-c1">60</span>)
+<span class="pl-c">#=&gt; [red, #ff000d, #ff0d00]</span></pre></div>
+
+<h4>
+<a id="monochromatic" class="anchor" href="#monochromatic" aria-hidden="true"><span class="octicon octicon-link"></span></a>Monochromatic</h4>
+
+<p>Generate a monochromatic palette. Pass in a <code>:size</code> option to specify the size
+of the palette (defaults to 6).</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.monochromatic
+<span class="pl-c">#=&gt; [red, #2a0000, #550000, maroon, #aa0000, #d40000]</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.monochromatic(<span class="pl-c1">as:</span> <span class="pl-c1">:hex</span>)
+<span class="pl-c">#=&gt; ['#ff0000', '#2a0000', '#550000', '#800000', '#aa0000', '#d40000']</span>
+
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.palette.monochromatic(<span class="pl-c1">size:</span> <span class="pl-c1">3</span>)
+<span class="pl-c">#=&gt; [red, #550000, #aa0000]</span></pre></div>
+
+<h2>
+<a id="defining-custom-palettes" class="anchor" href="#defining-custom-palettes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defining Custom Palettes</h2>
+
+<p>Chroma allows you to define your own custom palettes if the default ones aren't
+all you're looking for. You can define a custom palette by calling
+<code>Chroma.define_palette</code>, passing in a palette name and definition block. The
+definition block uses the color manipulation methods (i.e. <code>lighten</code>, <code>spin</code>,
+etc.) as its DSL. Every DSL call defines a new color that will be included
+in the palette. Your seed color (i.e. the color from which you call the
+palette method) will be included as the first color in your palette too.</p>
+
+<div class="highlight highlight-ruby"><pre>red <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint
+
+red.palette.respond_to? <span class="pl-c1">:my_palette</span> <span class="pl-c">#=&gt; false</span>
+
+<span class="pl-c"># Define a palette with 5 colors including the seed color</span>
+<span class="pl-s3">Chroma</span>.define_palette <span class="pl-c1">:my_palette</span> <span class="pl-k">do</span>
+  spin <span class="pl-c1">60</span>
+  spin <span class="pl-c1">180</span>
+  spin(<span class="pl-c1">60</span>).brighten(<span class="pl-c1">20</span>) <span class="pl-c"># chain calls as well</span>
+  greyscale
+<span class="pl-k">end</span>
+
+red.palette.respond_to? <span class="pl-c1">:my_palette</span> <span class="pl-c">#=&gt; true</span>
+
+red.palette.my_palette <span class="pl-c">#=&gt; [#ff0000 #ffff00 #00ffff #ffff33 #808080]</span></pre></div>
+
+<h2>
+<a id="serializing-colors" class="anchor" href="#serializing-colors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Serializing Colors</h2>
+
+<p>Colors offer several methods to output to different string color <a href="#available-formats">formats</a>.</p>
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>to_hsv</code></td>
+<td>output to hsv string, outputs hsva if alpha &lt; 1</td>
+</tr>
+<tr>
+<td><code>to_hsl</code></td>
+<td>output to hsl string, outputs hsla if alpha &lt; 1</td>
+</tr>
+<tr>
+<td><code>to_hex</code></td>
+<td>output to hex string, optional argument allows 3-character hex output if possible</td>
+</tr>
+<tr>
+<td><code>to_hex8</code></td>
+<td>output to 8-character hex string with alpha value in the highest order byte</td>
+</tr>
+<tr>
+<td><code>to_rgb</code></td>
+<td>output to rgb string, outputs rgba if alpha &lt; 1</td>
+</tr>
+<tr>
+<td><code>to_name</code></td>
+<td>output to color name string if available, otherwise <code>'&lt;unknown&gt;'</code> or <code>to_hex</code> output based on optional arg value</td>
+</tr>
+<tr>
+<td><code>to_s</code></td>
+<td>output to the appropriate string format based on how the color was created, optional arg forces the format</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># to_hsv</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_hsv                  <span class="pl-c">#=&gt; 'hsv(0, 100%, 100%)'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.to_hsv <span class="pl-c">#=&gt; 'hsva(0, 100%, 100%, 0.5)'</span>
+
+<span class="pl-c"># to_hsl</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_hsl                  <span class="pl-c">#=&gt; 'hsl(0, 100%, 50%)'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.to_hsl <span class="pl-c">#=&gt; 'hsla(0, 100%, 50%, 0.5)'</span>
+
+<span class="pl-c"># to_hex</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_hex                  <span class="pl-c">#=&gt; '#ff0000'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_hex(<span class="pl-c1">true</span>)            <span class="pl-c">#=&gt; '#f00'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.to_hex <span class="pl-c">#=&gt; '#ff0000'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_hex                  <span class="pl-c">#=&gt; '#ffff0000'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.to_hex <span class="pl-c">#=&gt; '#80ff0000'</span>
+
+<span class="pl-c"># to_rgb</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_rgb                  <span class="pl-c">#=&gt; 'rgb(255, 0, 0)'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.to_rgb <span class="pl-c">#=&gt; 'rgb(255, 0, 0, 0.5)'</span>
+
+<span class="pl-c"># to_name</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_name                  <span class="pl-c">#=&gt; 'red'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>#00f<span class="pl-pds">'</span></span>.paint.to_name                 <span class="pl-c">#=&gt; 'blue'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(255, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.to_name <span class="pl-c">#=&gt; '&lt;unknown&gt;'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>#123<span class="pl-pds">'</span></span>.paint.to_name(<span class="pl-c1">true</span>)           <span class="pl-c">#=&gt; '#112233'</span>
+
+<span class="pl-c"># to_s</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.to_s             <span class="pl-c">#=&gt; 'red'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgb(255, 0, 0)<span class="pl-pds">'</span></span>.paint.to_s  <span class="pl-c">#=&gt; 'rgb(255, 0, 0)'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>#f00<span class="pl-pds">'</span></span>.paint.to_s            <span class="pl-c">#=&gt; '#f00'</span>
+<span class="pl-s1"><span class="pl-pds">'</span>#80ff0000<span class="pl-pds">'</span></span>.paint.to_s(<span class="pl-c1">:rgb</span>) <span class="pl-c">#=&gt; 'rgba(255, 0, 0, 0.5)'</span></pre></div>
+
+<h2>
+<a id="other-methods" class="anchor" href="#other-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Methods</h2>
+
+<p>Colors also have a few other helper methods:</p>
+
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dark?</code></td>
+<td>is the color dark?</td>
+</tr>
+<tr>
+<td><code>light?</code></td>
+<td>is the color light?</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>retrieve the alpha value</td>
+</tr>
+<tr>
+<td><code>brightness</code></td>
+<td>calculate the brightness as a number between 0 and 255</td>
+</tr>
+<tr>
+<td><code>complement</code></td>
+<td>return the complementary color</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-c"># dark?</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.dark?    <span class="pl-c">#=&gt; true</span>
+<span class="pl-s1"><span class="pl-pds">'</span>yellow<span class="pl-pds">'</span></span>.paint.dark? <span class="pl-c">#=&gt; false</span>
+
+<span class="pl-c"># light?</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.light?    <span class="pl-c">#=&gt; false</span>
+<span class="pl-s1"><span class="pl-pds">'</span>yellow<span class="pl-pds">'</span></span>.paint.light? <span class="pl-c">#=&gt; true</span>
+
+<span class="pl-c"># alpha</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.alpha                <span class="pl-c">#=&gt; 1.0</span>
+<span class="pl-s1"><span class="pl-pds">'</span>rgba(0, 0, 0, 0.5)<span class="pl-pds">'</span></span>.paint.alpha <span class="pl-c">#=&gt; 0.5</span>
+
+<span class="pl-c"># brightness</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.brightness    <span class="pl-c">#=&gt; 76.245</span>
+<span class="pl-s1"><span class="pl-pds">'</span>yellow<span class="pl-pds">'</span></span>.paint.brightness <span class="pl-c">#=&gt; 225.93</span>
+<span class="pl-s1"><span class="pl-pds">'</span>white<span class="pl-pds">'</span></span>.paint.brightness  <span class="pl-c">#=&gt; 255.0</span>
+<span class="pl-s1"><span class="pl-pds">'</span>black<span class="pl-pds">'</span></span>.paint.brightness  <span class="pl-c">#=&gt; 0.0</span>
+
+<span class="pl-c"># complement</span>
+<span class="pl-s1"><span class="pl-pds">'</span>red<span class="pl-pds">'</span></span>.paint.complement <span class="pl-c">#=&gt; cyan</span></pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Please branch from <strong>dev</strong> for all pull requests.</p>
+
+<ol>
+<li>Fork it (<a href="https://github.com/jfairbank/chroma/fork">https://github.com/jfairbank/chroma/fork</a>)</li>
+<li>Checkout dev (<code>git checkout dev</code>)</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create a new pull request against dev</li>
+</ol>
+        </section>
+
+        <footer>
+          Chroma is maintained by <a href="https://github.com/jfairbank">jfairbank</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
