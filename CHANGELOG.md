@@ -1,4 +1,22 @@
-### v0.0.1 - 2015-01-14
+## v0.1.0 - 2016-05-26
+
+### Dynamic Custom Palettes
+
+You can generate custom palettes on the fly without predefining them now. The
+old way of defining them with a name via `Chroma.define_palette` still works
+too.
+
+```ruby
+# New dynamic way
+'red'.paint.custom_palette do
+  spin 60
+  spin 180
+end
+
+#=> [red, yellow, cyan]
+```
+
+## v0.0.1 - 2015-01-14
 
 **Method Changes:**
 
@@ -15,7 +33,7 @@
 * Minor API doc example fixes.
 * Add public API usage examples to README.
 
-### [v0.0.1.alpha.3] - 2015-01-13
+## [v0.0.1.alpha.3] - 2015-01-13
 
 **Bug Fixes:**
 
@@ -41,7 +59,7 @@
 * Introduced custom errors and replaced `raise` calls with them.
 * Added API doc headers. (#4)
 
-### [v0.0.1.alpha.2] - 2015-01-13
+## [v0.0.1.alpha.2] - 2015-01-13
 
 **Bug Fixes:**
 
@@ -82,6 +100,6 @@
   * `to_rgb_s`  -> `to_rgb`
   * Removed `to_name_s` alias
 
-### [v0.0.1.alpha.1] - 2015-01-11
+## [v0.0.1.alpha.1] - 2015-01-11
 
 * Initial release
