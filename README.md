@@ -270,6 +270,20 @@ red.palette.respond_to? :my_palette #=> true
 red.palette.my_palette #=> [#ff0000 #ffff00 #00ffff #ffff33 #808080]
 ```
 
+## Dynamic Custom Palettes
+
+You can generate custom palettes on the fly too with
+`Chroma::Color#custom_palette`.
+
+```ruby
+'red'.paint.custom_palette do
+  spin 60
+  spin 180
+end
+
+#=> [red, yellow, cyan]
+```
+
 ## Serializing Colors
 
 Colors offer several methods to output to different string color [formats](#available-formats).

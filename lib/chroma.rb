@@ -112,7 +112,11 @@ module Chroma
         raise Errors::PaletteDefinedError, "Palette `#{name}' already exists"
       end
 
-      PaletteBuilder.build(name, &block)
+      palette_evaluator = PaletteBuilder.build(&block)
+
+      Harmonies.send(:define_method, name) do
+        palette_evaluator.evaluate(@color)
+      end
     end
 
     private

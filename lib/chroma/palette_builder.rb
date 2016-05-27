@@ -4,47 +4,56 @@ module Chroma
     # Wrapper to instantiate a new instance of {PaletteBuilder} and call its
     #   {PaletteBuilder#build} method.
     #
-    # @param name  [Symbol, String] the name of the custom palette
-    # @param block [Proc]           the palette definition block
-    # @return      [Symbol, String] the name of the custom palette
-    def self.build(name, &block)
-      new(name, &block).build
+    # @param block [Proc]                             the palette definition block
+    # @return      [PaletteBuilder::PaletteEvaluator] lazy palette generator
+    def self.build(&block)
+      new(&block).build
     end
 
-    # @param name  [Symbol, String] the name of the custom palette
-    # @param block [Proc]           the palette definition block
-    def initialize(name, &block)
-      @name = name
+    # @param block [Proc] the palette definition block
+    def initialize(&block)
       @block = block
     end
 
-    # Build the custom palette by defining a new method on {Harmonies}.
-    # @return [Symbol, String] the name of the custom palette
+    # Build the custom palette
+    # @return [PaletteBuilder::PaletteEvaluator] lazy palette generator
     def build
       dsl = PaletteBuilderDsl.new
       dsl.instance_eval(&@block)
-      conversions = dsl.conversions
-
-      Harmonies.send(:define_method, @name) do
-        conversions.map do |color_calls|
-          color_calls.evaluate(@color)
-        end.unshift(@color)
-      end
+      dsl.evaluator
     end
 
     private
 
-    # Internal class for palette building DSL syntax.
-    class PaletteBuilderDsl
-      attr_reader :conversions
-
+    # Internal class for delaying evaluating a color to generate a
+    # final palette
+    class PaletteEvaluator
       def initialize
         @conversions = []
       end
 
+      def <<(conversion)
+        @conversions << conversion
+      end
+
+      def evaluate(color)
+        @conversions.map do |color_calls|
+          color_calls.evaluate(color)
+        end.unshift(color)
+      end
+    end
+
+    # Internal class for palette building DSL syntax.
+    class PaletteBuilderDsl
+      attr_reader :evaluator
+
+      def initialize
+        @evaluator = PaletteEvaluator.new
+      end
+
       def method_missing(name, *args)
         ColorCalls.new(name, args).tap do |color_calls|
-          @conversions << color_calls
+          @evaluator << color_calls
         end
       end
 

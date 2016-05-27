@@ -82,6 +82,22 @@ module Chroma
       Harmonies.new(self)
     end
 
+    # Defines a custom palette and immediately returns it. Uses a DSL inside
+    # `block` that mirrors the methods in {Color::Modifiers}.
+    #
+    # @example
+    #   'red'.paint.custom_palette do
+    #     spin 60
+    #     spin 180
+    #   end
+    #   #=> [red, yellow, cyan]
+    #
+    # @param block [Proc] the palette definition block
+    # @return [Array<Color>] palette array of colors
+    def custom_palette(&block)
+      PaletteBuilder.build(&block).evaluate(self)
+    end
+
     private
 
     def to_2char_hex(n)
