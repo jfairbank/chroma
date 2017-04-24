@@ -77,10 +77,7 @@ module Chroma
       end
 
       def normalize_input(input)
-        input.clone.tap do |str|
-          str.strip!
-          str.downcase!
-        end
+        input.strip.downcase
       end
 
       def matchers
