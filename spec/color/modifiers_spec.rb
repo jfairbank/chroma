@@ -79,6 +79,15 @@ describe Chroma::Color do
     end
   end
 
+  describe '#opacity' do
+    it 'sets color opacity to supplied amount' do
+      green_a = 'rgba(0, 128, 0, 0.5)'
+      expect(green_a.paint.opacity(1)).to eq 'rgba(0, 128, 0, 1)'.paint
+      expect('green'.paint.opacity(0)).to eq 'rgba(0, 128, 0, 0)'.paint
+      expect(red.opacity(0.3)).to         eq 'rgba(100%, 0%, 0%, 0.3)'.paint
+    end
+  end
+
   describe '#spin' do
     it 'generates the correct color' do
       expect(red.spin(60)).to eq yellow

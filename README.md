@@ -126,6 +126,15 @@ Convert the color to grayscale.
 'red'.paint.greyscale   #=> #808080
 ```
 
+#### Opacity
+
+Set the opacity of the color to a given amount.
+
+```ruby
+'red'.paint.opacity(0.3) #=> #ff0000
+'red'.paint.opacity(0.3).to_rgb #=> 'rgba(255, 0, 0, 0.3)'
+```
+
 #### Spin
 
 Spin a given amount in degrees around the hue wheel.
