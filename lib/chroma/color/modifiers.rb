@@ -90,6 +90,19 @@ module Chroma
 
       alias_method :greyscale, :grayscale
 
+      # Sets color opacity to the given 'amount'.
+      #
+      # @example
+      #   'red'.paint.opacity(0.5)        #=> #ff0000
+      #   'red'.paint.opacity(0.5).to_rgb #=> 'rgba(255, 0, 0, 0.5)'
+      #
+      # @param amount [Fixnum]
+      # @return       [Color]
+      def opacity(amount)
+        rgb = @rgb.to_a[0..2] + [amount]
+        self.class.new(ColorModes::Rgb.new(*rgb), @format)
+      end
+
       # Spins around the hue color wheel by `amount` in degrees.
       #
       # @example
