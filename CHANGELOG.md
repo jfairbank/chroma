@@ -1,3 +1,15 @@
+## v0.2.0
+
+### NEW `.opacity` Method
+
+Added an `.opacity` method to set the opacity of a color. (credit [@matildasmeds](https://github.com/matildasmeds))
+
+```ruby
+'red'.paint.opacity(0.3).to_rgb #=> 'rgba(255, 0, 0, 0.3)'
+```
+
+---
+
 ## v0.1.0 - 2016-05-26
 
 ### Dynamic Custom Palettes
