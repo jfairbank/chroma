@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Chroma
   # Main module to generate an instance of {ColorModes::Rgb} from several
   # possible inputs.
