@@ -1,3 +1,11 @@
+## v0.2.1 - 2019-03-14
+
+**Bug Fixes:**
+
+* Fix bug where painting frozen strings would raise an exception for 2.3+ ruby versions.
+
+---
+
 ## v0.2.0
 
 ### NEW `.opacity` Method
