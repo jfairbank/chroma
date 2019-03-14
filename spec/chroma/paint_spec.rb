@@ -51,5 +51,11 @@ describe Chroma do
         expect(Chroma.paint('hsl(120, 100%, 50%)')).to be_a(Chroma::Color)
       end
     end
+
+    context 'with a frozen input' do
+      it 'creates a color' do
+        expect(Chroma.paint('red'.freeze)).to be_a(Chroma::Color)
+      end
+    end
   end
 end
