@@ -50,7 +50,7 @@ module Chroma
         # @param g      [String] green value
         # @param b      [String] blue value
         # @param a      [String] alpha value
-        def from_hex8(format, a, r, g, b)
+        def from_hex8(format, r, g, b, a)
           new(format || :hex8, r, g, b, a)
         end
       end
